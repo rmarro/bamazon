@@ -56,6 +56,7 @@ function promptCustomer() {
     })
 };
 
+// Check if enough in stock, if so complete purchase and display total
 function itemPurchase(quantity, item) {
     if (quantity > item.stock_quantity) {
         console.log(`\nInsufficient stock. Please choose a quantity under ${item.stock_quantity}\n`);
@@ -63,10 +64,12 @@ function itemPurchase(quantity, item) {
     } else {
         var total = quantity * item.price;
         console.log(`\nYou purchased ${quantity} of the item "${item.product_name}" for a total of $${total}\n`);
+        // UPDATE DATABASE WITH NEW QUANTITY (item.stock_quantity - quantity)
         buyOrQuit();
     }
 };
 
+// Ask if customer wants to purchase again or quit
 function buyOrQuit() {
     inquirer.prompt([
         {
@@ -84,6 +87,5 @@ function buyOrQuit() {
     })
 }
 
-                // if enough items
-                    //somehow get price by id and multiply by quantity for total
-                    //update database to reflect new quantity
+//TO DO
+//update database to reflect new quantity in itemPurchase
