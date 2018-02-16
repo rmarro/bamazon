@@ -15,6 +15,8 @@ var connection = mysql.createConnection({
     database: "bamazon_db"
 });
 
+var validID;
+
 // If there isn't an error, display items in db
 connection.connect(function (err) {
     if (err) throw err;
@@ -28,22 +30,37 @@ function displayItems() {
         for (var i = 0; i < res.length; i++) {
             console.log(`ID: ${res[i].id}  | Item: ${res[i].product_name} | Price: $${res[i].price}`);
         };
-        promptCustomer();
+        validID = res.length;
+        promptCustomer(validID);
     })
 };
 
 // Ask customer for ID and quantity of desired purchase
-function promptCustomer() {
+function promptCustomer(validID) {
     inquirer.prompt([
         {
         type: "input",
         name: "id",
         message: "Please enter the ID of the item you would like to buy",
+        validate: function(value) {
+            if (value <= validID && value > 0) {
+                return true;
+            } else {
+                return "Please enter a valid ID";
+            }
+        }
         },
         {
         type: "input",
         name: "quantity",
-        message: "Please enter the quantity you would like to buy"
+        message: "Please enter the quantity you would like to buy",
+        // validate: function(value) {
+        //     if (Number.isInteger(value)) {
+        //         return true;
+        //     } else {
+        //         return "Please enter a number"
+        //     }
+        // }
         }
     ]).then(function(response) {
         // Get the item from db with that ID
@@ -60,7 +77,7 @@ function promptCustomer() {
 function itemPurchase(purchaseQuantity, item) {
     if (purchaseQuantity > item.stock_quantity) {
         console.log(`\nInsufficient stock. Please choose a quantity under ${item.stock_quantity}\n`);
-        promptCustomer();
+        promptCustomer(validID);
     } else {
         var total = purchaseQuantity * item.price;
         console.log(`\nYou purchased ${purchaseQuantity} of the item "${item.product_name}" for a total of $${total}\n`);
