@@ -57,14 +57,26 @@ function promptCustomer() {
 };
 
 // Check if enough in stock, if so complete purchase and display total
-function itemPurchase(quantity, item) {
-    if (quantity > item.stock_quantity) {
+function itemPurchase(purchaseQuantity, item) {
+    if (purchaseQuantity > item.stock_quantity) {
         console.log(`\nInsufficient stock. Please choose a quantity under ${item.stock_quantity}\n`);
         promptCustomer();
     } else {
-        var total = quantity * item.price;
-        console.log(`\nYou purchased ${quantity} of the item "${item.product_name}" for a total of $${total}\n`);
-        // UPDATE DATABASE WITH NEW QUANTITY (item.stock_quantity - quantity)
+        var total = purchaseQuantity * item.price;
+        console.log(`\nYou purchased ${purchaseQuantity} of the item "${item.product_name}" for a total of $${total}\n`);
+
+        // Update database with new quantity
+        connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [
+                {
+                    stock_quantity: item.stock_quantity - purchaseQuantity
+                },
+                {
+                    id: item.id
+                }
+            ]
+        );
         buyOrQuit();
     }
 };
@@ -86,6 +98,3 @@ function buyOrQuit() {
         }
     })
 }
-
-//TO DO
-//update database to reflect new quantity in itemPurchase
