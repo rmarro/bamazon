@@ -28,7 +28,7 @@ function displayItems() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log(`ID: ${res[i].id}  | Item: ${res[i].product_name} | Price: $${res[i].price}`);
+            console.log(`ID: ${res[i].id} | Item: ${res[i].product_name} | Price: $${res[i].price}`);
         };
         validID = res.length;
         promptCustomer(validID);
