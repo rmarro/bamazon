@@ -54,13 +54,6 @@ function promptCustomer(validID) {
         type: "input",
         name: "quantity",
         message: "Please enter the quantity you would like to buy",
-        // validate: function(value) {
-        //     if (Number.isInteger(value)) {
-        //         return true;
-        //     } else {
-        //         return "Please enter a number"
-        //     }
-        // }
         }
     ]).then(function(response) {
         // Get the item from db with that ID
