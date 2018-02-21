@@ -2,13 +2,13 @@
 
 Bamazon is an app for managing product stock and customer orders. It can display available products, complete customer requests, and deplete the item stock in the products database. 
 
-## Customer app
+# Customer app
 
 When a customer starts the app, they are provided with a list of all products in the database. They are prompted to enter the ID of the product they want to purchase.
 
 ![Customer image 1](./images/customer1.PNG)
 
-### Validation
+## Validation
 If the customer enters a number that is not a product ID, they are prompted to enter a valid ID.
 
 ![Customer image 2](./images/customer2.PNG)
@@ -17,7 +17,7 @@ Then they are prompted for how many of that product they'd like to purchase.
 
 ![Customer image 3](./images/customer3.PNG)
 
-### Validation
+## Validation
 If the customer requests a quantity higher than what is available in stock, they will be informed of the current number available from the database and prompted to enter a new quantity.
 
 ![Customer image 4](./images/customer4.PNG)
@@ -41,3 +41,17 @@ connection.query(
     ]
 );
 ```
+
+# Manager app
+
+When a manager starts the app, they are provided with a list of options
+
+![Manager image 1](./images/manager1.PNG)
+
+## View products for sale
+
+This displays information for all items in the database
+
+![Manager image 2](./images/manager2.PNG)
+
+## Additional functionality coming soon!

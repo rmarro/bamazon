@@ -66,7 +66,7 @@ function displayItems() {
 
 // Display items with inventory less than 5
 function lowInventory() {
-    console.log("functionality coming soon");
+       console.log("functionality coming soon");
     displayOptions();
 };
 
